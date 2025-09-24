@@ -1,251 +1,213 @@
-# Teodoro – Quartel-General Digital com Leon
+# Teodoro – Quartel-General Digital (baseado em Leon)
 
-Este repositório contém a configuração base do seu assistente pessoal **Teodoro**, construído sobre o ecossistema [Leon](https://getleon.ai/) e preparado para operar como um "quartel-general digital" modular. O projeto foi organizado para atender aos seguintes princípios:
+Este projeto adiciona o **Teodoro** (orquestrador) e agentes especializados ao [Leon](https://getleon.ai/), formando um “quartel-general digital” modular controlado por **texto** (e opcionalmente **voz** no futuro).
 
-- **Núcleo central (Teodoro)** capaz de orquestrar agentes especialistas.
-- **Agentes independentes** e expansíveis, com _skills_ em Node.js ou Python.
-- **Arquitetura escalável** e compatível com integrações externas (APIs, n8n, ChatGPT, etc.).
-- **Interface preparada para controle visual** (Web UI opcional) e fluxo de trabalho por voz e texto.
-
-> ⚠️ **Pré-requisito**: É necessário ter o projeto principal do Leon já instalado (via Docker ou CLI oficial). Este repositório fornece os pacotes personalizados do Teodoro e instruções para integrá-los ao Leon.
+> ⚠️ Pré-requisito: tenha o Leon instalado e rodando na **versão estável** antes de continuar.
 
 ---
 
-## Estrutura do Projeto
+## 1) Pré-requisitos
 
-```
-.
-├── README.md
-├── docker-compose.teodoro.yml
-└── packages
-    ├── financeiro
-    │   ├── package.json
-    │   ├── config.json
-    │   └── src
-    │       ├── analytics-suite
-    │       │   ├── config.json
-    │       │   ├── en.json
-    │       │   ├── pt.json
-    │       │   ├── intents.json
-    │       │   └── action.js
-    │       ├── commerce-strategy
-    │       │   ├── config.json
-    │       │   ├── en.json
-    │       │   ├── pt.json
-    │       │   ├── intents.json
-    │       │   └── action.py
-    │       └── reporting-hub
-    │           ├── config.json
-    │           ├── en.json
-    │           ├── pt.json
-    │           ├── intents.json
-    │           └── action.js
-    └── teodoro
-        ├── package.json
-        ├── config.json
-        └── src
-            ├── control-panel
-            │   ├── config.json
-            │   ├── en.json
-            │   ├── pt.json
-            │   ├── intents.json
-            │   └── action.js
-            ├── skill-registry
-            │   ├── config.json
-            │   ├── en.json
-            │   ├── pt.json
-            │   ├── intents.json
-            │   └── action.js
-            ├── agent-factory
-            │   ├── config.json
-            │   ├── en.json
-            │   ├── pt.json
-            │   ├── intents.json
-            │   └── action.js
-            └── comms-monitor
-                ├── config.json
-                ├── en.json
-                ├── pt.json
-                ├── intents.json
-                └── action.js
-```
+- **Node.js ≥ 22.13.1** e **npm ≥ 10.9.2**
+- **Git**
+- (Opcional) **Python 3** se você for usar skills em Python
+- Chave da OpenAI (`OPENAI_API_KEY`) se quiser integrar com ChatGPT
 
-- Cada **package** representa um agrupamento lógico de skills do Leon.
-- As **skills** possuem intenções (`intents.json`), respostas multilíngues (`pt.json`, `en.json`) e ações em Node.js ou Python (`action.js` ou `action.py`).
-- O `docker-compose.teodoro.yml` permite subir uma instância personalizada do Leon com os pacotes do Teodoro conectados.
+Verifique as versões básicas:
+
+```bash
+node -v
+npm -v
+```
 
 ---
 
-## Passo a Passo de Instalação
+## 2) Instalar o Leon (estável)
 
-### 1. Preparar o Leon oficial
+Instale a CLI e crie um projeto “birth” do Leon:
 
 ```bash
-# Clonar o Leon (caso ainda não tenha)
-git clone https://github.com/leon-ai/leon.git
+npm i -g @leon-ai/cli
+
+leon create birth
+cd birth
+
+leon check
+leon start
+# Abra: http://localhost:1337
+# Pare com Ctrl+C para continuar a configuração abaixo
 ```
 
-> Se preferir, deixe este terminal aberto dentro da pasta `leon` — iremos reutilizá-lo mais adiante.
+---
 
-### 2. Clonar o Teodoro
+## 3) Trazer as skills do Teodoro
 
-Em outro terminal (ou após sair da pasta `leon`), obtenha este repositório e entre nele:
+Em uma pasta paralela à do Leon, clone este repositório (ou baixe o `.zip`):
 
 ```bash
+cd ..
 git clone https://github.com/SEU_USUARIO/teodoro.git
-cd teodoro
+# ou descompacte o .zip
 ```
 
-> Substitua `SEU_USUARIO` pelo usuário ou organização onde este repositório está hospedado (por exemplo, `erickleon`). Se você
-> estiver trabalhando a partir de um arquivo `.zip`, basta descompactá-lo e entrar na pasta resultante em vez de executar o
-> `git clone`.
-
-### 3. Instalar o Teodoro automaticamente
-
-Com o terminal posicionado na raiz **deste** projeto (`teodoro`), execute o script passando o caminho do seu checkout do Leon:
+Agora copie as skills deste repositório para o Leon, respeitando a estrutura (ajuste o caminho `../teodoro` conforme sua máquina):
 
 ```bash
-./scripts/install-teodoro.sh /caminho/para/seu/leon
+# partindo da pasta do Leon (ex.: birth/)
+cd birth
 
-# Exemplo comum, se os diretórios estão lado a lado:
-./scripts/install-teodoro.sh ../leon
+# Crie os domínios se não existirem:
+mkdir -p skills/teodoro
+mkdir -p skills/business_finance
 
-# Se você continuou dentro da pasta "leon", execute a partir dela apontando para o script externo:
-../teodoro/scripts/install-teodoro.sh .
+# Copie as skills do Teodoro para dentro do Leon:
+cp -R ../teodoro/skills/teodoro/* skills/teodoro/
+cp -R ../teodoro/skills/business_finance/* skills/business_finance/
 ```
 
-O script copiará os pacotes `teodoro` e `financeiro` para `packages/teodoro-system` dentro do Leon, registrará as entradas em `core/config/instances.json` e atualizará o arquivo `docker-compose.teodoro.yml` do Leon. Ele é idempotente: pode ser executado novamente ao atualizar este repositório.
+**Regra de ouro:** sem espaços ou acentos em nomes de pastas/arquivos. Use `kebab-case` em inglês (ex.: `control-panel`, `analytics-suite`, `commerce-strategy`, `reporting-hub`).
 
-> Requisitos do script: `bash`, `python3` e permissões de escrita no diretório do Leon.
+---
 
-### 4. Instalar dependências do Leon
+## 4) Configurar variáveis de ambiente (`.env`)
 
-De volta ao diretório do Leon:
+Crie (ou edite) o arquivo `.env` na raiz do projeto Leon (ex.: `birth/.env`):
 
 ```bash
-npm install
-npm run bootstrap
+# .env
+OPENAI_API_KEY=coloque_sua_chave_aqui
+LEON_LANGS=pt,en
 ```
 
-### 5. Executar com Docker (recomendado)
+Comece apenas com texto↔texto. Habilite voz (STT/TTS) depois que tudo estiver estável.
 
-Ainda no diretório do Leon:
+---
+
+## 5) Subir o Leon com as novas skills
 
 ```bash
-# Suba os serviços com o compose preparado pelo script
-docker compose -f docker-compose.teodoro.yml up -d
+leon start
+# Abra: http://localhost:1337
 ```
 
-> ✅ **Verifique as montagens**: dentro do diretório do Leon, execute `ls packages/teodoro-system/packages` para confirmar que `financeiro/` e `teodoro/` foram copiados. O `docker-compose.teodoro.yml` monta esses diretórios diretamente no container (`/home/leon/packages/...`), garantindo que o Leon carregue as skills.
+Teste intenções das suas skills (ex.: abrir painel, criar agente, gerar relatório, sugerir estratégia, etc.).
 
-O serviço principal estará acessível na porta `4242`. Para habilitar a interface visual opcional, execute o compose com o perfil `dashboard`:
+---
 
-```bash
-docker compose -f docker-compose.teodoro.yml --profile dashboard up -d
+## 6) Estrutura de skills (referência)
+
+As skills vivem em `skills/<domínio>/<skill>`. Cada skill contém:
+
+- `package.json`
+- `config.json`
+- `intents.json`
+- `en.json`, `pt.json`
+- `action.js` ou `action.py`
+
+### Teodoro (núcleo/orquestrador)
+
+- `control-panel`: mudar idioma, exibir status do sistema e abrir o painel.
+- `skill-registry`: adicionar/atualizar/remover skills (inclusive via repositório GitHub).
+- `agent-factory`: criar e registrar novos agentes com manifesto.
+- `comms-monitor`: monitorar logs e assinaturas de canais.
+
+### Agente Financeiro (módulo independente)
+
+- `analytics-suite` (Node.js): análises estatísticas e leitura de dados externos.
+- `commerce-strategy` (Python): funis de venda, UX/copywriting e psicologia do consumidor.
+- `reporting-hub` (Node.js): relatórios PDF/CSV, projeções e simulações financeiras.
+
+Os agentes conversam entre si e com o Teodoro, que coordena as execuções.
+
+---
+
+## 7) Integrações (opcionais)
+
+- **ChatGPT / OpenAI**: utilize `OPENAI_API_KEY` no `.env`.
+- **n8n / E-commerce / ERPs / CRMs**: exponha webhooks/APIs pelas skills.
+- Depois que o fluxo texto↔texto estiver estável, você pode habilitar entrada/saída de voz configurando `STT_PROVIDER` e `TTS_PROVIDER`.
+
+---
+
+## 8) Solução de problemas rápida
+
+- **Não abre http://localhost:1337** → Confirme `leon start` sem erros, porta livre e uso da versão estável do Leon.
+- **“Cannot find module …”** → Verifique se copiou as pastas para `skills/<domínio>/<skill>` sem acentos/espaços. Reinicie `leon start`.
+- **“API key missing”** → Confirme o `.env` na raiz do projeto. Reinicie.
+- **Skills em Python falhando** → Confira `python --version` e dependências específicas da skill.
+
+---
+
+## 9) Próximos passos
+
+- Implementar (posteriormente) a interface web opcional para o `control-panel`.
+- Criar mais agentes (Marketing, Operações, Jurídico, etc.).
+- Adicionar testes automatizados e pipeline de CI.
+
+---
+
+## Árvore de pastas deste repositório
+
+```text
+skills/
+  teodoro/
+    control-panel/
+      package.json
+      config.json
+      intents.json
+      en.json
+      pt.json
+      action.js
+    skill-registry/
+      package.json
+      config.json
+      intents.json
+      en.json
+      pt.json
+      action.js
+    agent-factory/
+      package.json
+      config.json
+      intents.json
+      en.json
+      pt.json
+      action.js
+    comms-monitor/
+      package.json
+      config.json
+      intents.json
+      en.json
+      pt.json
+      action.js
+
+  business_finance/
+    analytics-suite/
+      package.json
+      config.json
+      intents.json
+      en.json
+      pt.json
+      action.js
+    commerce-strategy/
+      package.json
+      config.json
+      intents.json
+      en.json
+      pt.json
+      action.py
+    reporting-hub/
+      package.json
+      config.json
+      intents.json
+      en.json
+      pt.json
+      action.js
 ```
 
-### 6. Compilar as skills manualmente (opcional)
-
-Leon irá detectar os pacotes automaticamente na primeira execução. Caso queira forçar a compilação das _skills_:
-
-```bash
-npm run build -- --scope @teodoro/* --scope @teodoro-financeiro/*
-```
+Padrões de nome: apenas letras minúsculas (`a-z`), números (`0-9`) e hífen (`-`).
 
 ---
 
-## Teodoro – Núcleo do Sistema
+## `.env.example`
 
-Teodoro é o maestro responsável por coordenar a operação. Ele oferece:
-
-- **Interface de controle**: A skill `control-panel` expõe comandos para mudar idioma, consultar status do sistema e abrir a interface web (veja abaixo).
-- **Gerência de skills**: A skill `skill-registry` facilita adicionar, atualizar ou remover habilidades. Ela consome repositórios Git (via `simple-git`) e registra as entradas no Leon automaticamente.
-- **Criação de agentes**: A skill `agent-factory` gera manifestos para novos agentes, define responsabilidades e automatiza a criação da estrutura de pastas.
-- **Monitoramento**: A skill `comms-monitor` acessa os logs centralizados (via WebSocket) e fornece feedback ao usuário em tempo real.
-
-### Interface Visual
-
-A interface opcional utiliza Next.js e pode ser habilitada via variável `TEODORO_CONTROL_CENTER=1`. Ela consome a API exposta pelo `control-panel` e oferece:
-
-- Dashboard com status dos agentes.
-- Formulário para criar habilidades/skills e agentes.
-- Visualização de logs ao vivo.
-
-> O código da interface pode ser hospedado no diretório `packages/teodoro-system/apps/control-center` após a instalação (o script copia o conteúdo de `apps/control-center` para lá) ou conectado externamente.
-
----
-
-## Agentes Especialistas
-
-Agentes vivem em pacotes separados. O exemplo inicial é o **Agente Financeiro**, com foco em vendas, UX, finanças, psicologia do consumidor e análise de dados.
-
-### Principais skills do Agente Financeiro
-
-| Skill | Função | Linguagens |
-|-------|--------|------------|
-| `analytics-suite` | Interpreta métricas de desempenho e cria relatórios estatísticos. | Node.js |
-| `commerce-strategy` | Sugere funis de vendas, otimizações de UX e copywriting. | Python |
-| `reporting-hub` | Gera relatórios financeiros completos (PDF/CSV) e simulações. | Node.js |
-
-Cada skill é modular, podendo receber atualizações contínuas e integrar APIs externas (CRM, ERPs, e-commerces, etc.).
-
-### Comunicação entre Agentes
-
-- **Bus de Eventos**: Teodoro expõe um barramento (WebSocket + Redis Pub/Sub) compartilhado com os agentes.
-- **Mensagens Diretas**: As skills podem enviar mensagens para outras usando o endpoint `/agents/{name}/notify`.
-- **Colaboração**: Por exemplo, `commerce-strategy` pode solicitar ao `analytics-suite` dados de performance antes de sugerir ações.
-
----
-
-## Suporte a Voz e Texto
-
-- **Entrada por Voz**: Configurada via `Snowboy`/`Porcupine` para wake-word e `Vosk` para reconhecimento em português/inglês.
-- **Saída em Voz**: Skills podem responder com áudio gerado por `Coqui TTS` ou `Google Cloud TTS` (configurável).
-- **Fallback por Texto**: Todo fluxo pode ser operado via chat (CLI, web ou API), garantindo acessibilidade.
-
-Variáveis relevantes (em `.env` do Leon):
-
-```
-# Idiomas suportados
-TEODORO_LANGUAGES=pt,en
-
-# Configuração de STT/TTS
-STT_PROVIDER=vosk
-STT_VOSK_MODEL=pt
-TTS_PROVIDER=coqui
-TTS_COQUI_VOICE=ed
-```
-
----
-
-## Integrações Externas
-
-- **n8n**: Disponibilize _webhooks_ para orquestrar automações.
-- **APIs de E-commerce**: Use `commerce-strategy` para consumir dados (Shopify, VTEX, WooCommerce, etc.).
-- **ChatGPT / OpenAI**: Integre através das credenciais setadas em variáveis `OPENAI_API_KEY`.
-
-Cada skill possui uma seção `integrations` em seu `config.json` para habilitar as conexões sem alterar o código base.
-
----
-
-## Expansão
-
-1. **Criar novo agente**: Execute `Hey Leon, create agent called Pesquisa with focus on market research`. Teodoro irá gerar a estrutura automaticamente.
-2. **Adicionar skill**: Informe o repositório Git ou faça upload via interface. A skill será adicionada ao manifesto do agente e compilada.
-3. **Atualizar idioma**: Use o comando `Switch Teodoro to English` ou `Alterar Teodoro para português`.
-4. **Logs**: Consulte `Show me the latest agent logs` para obter os registros.
-
----
-
-## Próximos Passos
-
-- Implementar a interface web (Next.js) conectada ao `control-panel`.
-- Adicionar testes automatizados para as skills.
-- Expandir o catálogo de agentes (Marketing, Jurídico, Operações, etc.).
-- Criar _pipelines_ de CI/CD (GitHub Actions) para validar novas skills antes de publicá-las.
-
----
-
-## Licença
-
-MIT.
+Um arquivo de exemplo com as variáveis principais está disponível em [`./.env.example`](./.env.example). Copie-o para a raiz do seu projeto Leon e renomeie para `.env` antes de preencher sua chave.

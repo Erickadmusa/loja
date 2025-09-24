@@ -1,0 +1,11 @@
+{
+  "name": "@teodoro/skill-registry",
+  "version": "0.1.0",
+  "description": "Registra e gerencia skills no ecossistema Teodoro",
+  "main": "action.js",
+  "author": "Quartel-General Digital",
+  "license": "MIT",
+  "dependencies": {
+    "simple-git": "^3.20.0"
+  }
+}

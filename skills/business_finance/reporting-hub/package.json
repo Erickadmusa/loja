@@ -1,0 +1,13 @@
+{
+  "name": "@teodoro-financeiro/reporting-hub",
+  "version": "0.1.0",
+  "description": "Geração de relatórios financeiros e simulações",
+  "main": "action.js",
+  "author": "Quartel-General Digital",
+  "license": "MIT",
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "luxon": "^3.4.4",
+    "pdfkit": "^0.13.0"
+  }
+}

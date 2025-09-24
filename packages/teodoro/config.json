@@ -1,7 +1,0 @@
-{
-  "name": "teodoro",
-  "description": "Pacote núcleo do assistente Teodoro",
-  "author": "Quartel-General Digital",
-  "languages": ["pt", "en"],
-  "defaultLanguage": "pt"
-}

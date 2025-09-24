@@ -1,0 +1,12 @@
+{
+  "name": "@teodoro-financeiro/analytics-suite",
+  "version": "0.1.0",
+  "description": "Suite de análises estatísticas e métricas financeiras",
+  "main": "action.js",
+  "author": "Quartel-General Digital",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "mathjs": "^11.11.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "@teodoro/comms-monitor",
+  "version": "0.1.0",
+  "description": "Monitora logs e canais de comunicação do Teodoro",
+  "main": "action.js",
+  "author": "Quartel-General Digital",
+  "license": "MIT"
+}
