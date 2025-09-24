@@ -92,9 +92,13 @@ git clone https://github.com/leon-ai/leon.git
 Em outro terminal (ou após sair da pasta `leon`), obtenha este repositório e entre nele:
 
 ```bash
-git clone https://github.com/<seu-usuario>/teodoro.git
+git clone https://github.com/SEU_USUARIO/teodoro.git
 cd teodoro
 ```
+
+> Substitua `SEU_USUARIO` pelo usuário ou organização onde este repositório está hospedado (por exemplo, `erickleon`). Se você
+> estiver trabalhando a partir de um arquivo `.zip`, basta descompactá-lo e entrar na pasta resultante em vez de executar o
+> `git clone`.
 
 ### 3. Instalar o Teodoro automaticamente
 
