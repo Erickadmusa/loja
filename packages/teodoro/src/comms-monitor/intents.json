@@ -1,0 +1,21 @@
+{
+  "intents": [
+    {
+      "name": "show_logs",
+      "utterances": {
+        "pt": ["mostrar logs", "exibir registros", "monitorar agentes"],
+        "en": ["show logs", "display records", "monitor agents"]
+      }
+    },
+    {
+      "name": "subscribe_channel",
+      "utterances": {
+        "pt": ["assinar canal de logs", "monitorar canal"],
+        "en": ["subscribe to log channel", "monitor channel"]
+      },
+      "slots": [
+        { "name": "channel", "entity": "text" }
+      ]
+    }
+  ]
+}

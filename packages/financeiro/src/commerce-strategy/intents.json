@@ -1,0 +1,15 @@
+{
+  "intents": [
+    {
+      "name": "suggest_strategy",
+      "utterances": {
+        "pt": ["sugerir estratégia de vendas", "otimizar funil", "melhorar conversão"],
+        "en": ["suggest sales strategy", "optimize funnel", "improve conversion"]
+      },
+      "slots": [
+        { "name": "objective", "entity": "text" },
+        { "name": "audience", "entity": "text" }
+      ]
+    }
+  ]
+}

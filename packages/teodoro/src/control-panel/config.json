@@ -1,0 +1,6 @@
+{
+  "name": "control-panel",
+  "description": "Interface de controle central do Teodoro",
+  "type": "command",
+  "author": "Quartel-General Digital"
+}

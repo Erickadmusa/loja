@@ -1,0 +1,32 @@
+{
+  "intents": [
+    {
+      "name": "list_skills",
+      "utterances": {
+        "pt": ["listar skills", "quais skills estão instaladas", "mostrar habilidades"],
+        "en": ["list skills", "which skills are installed", "show abilities"]
+      }
+    },
+    {
+      "name": "install_skill",
+      "utterances": {
+        "pt": ["instalar skill", "adicionar nova skill", "adicionar habilidade"],
+        "en": ["install skill", "add new skill", "add ability"]
+      },
+      "slots": [
+        { "name": "repository", "entity": "url" },
+        { "name": "agent", "entity": "agent" }
+      ]
+    },
+    {
+      "name": "remove_skill",
+      "utterances": {
+        "pt": ["remover skill", "desinstalar habilidade"],
+        "en": ["remove skill", "uninstall ability"]
+      },
+      "slots": [
+        { "name": "skill", "entity": "skill" }
+      ]
+    }
+  ]
+}

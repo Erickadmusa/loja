@@ -1,0 +1,6 @@
+{
+  "name": "comms-monitor",
+  "description": "Monitoramento de comunicação entre agentes",
+  "type": "command",
+  "author": "Quartel-General Digital"
+}

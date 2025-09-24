@@ -1,0 +1,31 @@
+{
+  "intents": [
+    {
+      "name": "show_status",
+      "utterances": {
+        "pt": ["mostrar status do teodoro", "qual o status do sistema", "abrir painel de controle"],
+        "en": ["show teodoro status", "what is the system status", "open control panel"]
+      }
+    },
+    {
+      "name": "switch_language",
+      "utterances": {
+        "pt": ["mudar idioma para português", "mudar idioma para inglês", "alterar idioma"],
+        "en": ["switch language to portuguese", "switch language to english", "change language"]
+      },
+      "slots": [
+        {
+          "name": "language",
+          "entity": "language"
+        }
+      ]
+    },
+    {
+      "name": "launch_dashboard",
+      "utterances": {
+        "pt": ["abrir dashboard", "abrir painel visual", "mostrar interface"],
+        "en": ["open dashboard", "show visual panel", "open interface"]
+      }
+    }
+  ]
+}

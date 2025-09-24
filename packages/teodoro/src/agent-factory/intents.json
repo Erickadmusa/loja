@@ -1,0 +1,22 @@
+{
+  "intents": [
+    {
+      "name": "create_agent",
+      "utterances": {
+        "pt": ["criar novo agente", "cadastrar agente", "novo agente"],
+        "en": ["create new agent", "register agent", "new agent"]
+      },
+      "slots": [
+        { "name": "agent_name", "entity": "agent" },
+        { "name": "purpose", "entity": "text" }
+      ]
+    },
+    {
+      "name": "list_agents",
+      "utterances": {
+        "pt": ["listar agentes", "quais agentes existem"],
+        "en": ["list agents", "which agents exist"]
+      }
+    }
+  ]
+}

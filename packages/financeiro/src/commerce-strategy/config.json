@@ -1,0 +1,7 @@
+{
+  "name": "commerce-strategy",
+  "description": "Estratégias de vendas e UX",
+  "type": "command",
+  "author": "Agente Financeiro",
+  "runtime": "python"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "reporting-hub",
+  "description": "Geração de relatórios financeiros",
+  "type": "command",
+  "author": "Agente Financeiro"
+}

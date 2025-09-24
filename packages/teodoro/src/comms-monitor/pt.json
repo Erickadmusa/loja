@@ -1,0 +1,15 @@
+{
+  "show_logs": {
+    "default": [
+      "Últimos logs: {logs}."
+    ],
+    "empty": [
+      "Ainda não há logs disponíveis."
+    ]
+  },
+  "subscribe_channel": {
+    "success": [
+      "Inscrito no canal {channel}. As atualizações aparecerão no dashboard."
+    ]
+  }
+}

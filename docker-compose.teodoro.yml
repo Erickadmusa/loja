@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  teodoro-core:
+    image: leonai/leon:latest
+    container_name: teodoro-core
+    environment:
+      - TEODORO_CONTROL_CENTER=1
+      - TEODORO_CONTROL_URL=http://localhost:4242/control
+      - TEODORO_LANGUAGES=pt,en
+      - STT_PROVIDER=vosk
+      - STT_VOSK_MODEL=pt
+      - TTS_PROVIDER=coqui
+      - TTS_COQUI_VOICE=ed
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    volumes:
+      - ./packages/teodoro-system/packages/teodoro:/home/leon/packages/teodoro
+      - ./packages/teodoro-system/packages/financeiro:/home/leon/packages/financeiro
+      - teodoro-data:/home/leon/data
+    ports:
+      - "4242:4242"
+    depends_on:
+      - teodoro-redis
+
+  teodoro-redis:
+    image: redis:7
+    container_name: teodoro-redis
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+
+  teodoro-dashboard:
+    image: node:18-alpine
+    container_name: teodoro-dashboard
+    working_dir: /app
+    volumes:
+      - ./packages/teodoro-system/apps/control-center:/app
+    command: ["npm", "run", "dev"]
+    environment:
+      - PORT=4242
+    depends_on:
+      - teodoro-core
+    ports:
+      - "3000:4242"
+    profiles: ["dashboard"]
+
+volumes:
+  teodoro-data:
+  redis-data:

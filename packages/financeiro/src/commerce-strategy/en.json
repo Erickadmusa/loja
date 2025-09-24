@@ -1,0 +1,7 @@
+{
+  "suggest_strategy": {
+    "success": [
+      "Recommended strategy for {objective} targeting {audience}: {strategy}."
+    ]
+  }
+}

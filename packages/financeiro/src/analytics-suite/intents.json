@@ -1,0 +1,14 @@
+{
+  "intents": [
+    {
+      "name": "analyze_metrics",
+      "utterances": {
+        "pt": ["analisar métricas", "interpretar dados", "análise estatística"],
+        "en": ["analyze metrics", "interpret data", "statistical analysis"]
+      },
+      "slots": [
+        { "name": "dataset", "entity": "url" }
+      ]
+    }
+  ]
+}

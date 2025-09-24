@@ -1,0 +1,29 @@
+{
+  "list_skills": {
+    "empty": [
+      "Ainda não há skills registradas."
+    ],
+    "default": [
+      "Encontrei {count} skills: {skills}."
+    ]
+  },
+  "install_skill": {
+    "progress": [
+      "Instalando a skill do repositório {repository} para o agente {agent}."
+    ],
+    "success": [
+      "Skill {skill} instalada para o agente {agent}."
+    ],
+    "failure": [
+      "Não consegui instalar a skill porque {reason}."
+    ]
+  },
+  "remove_skill": {
+    "success": [
+      "Skill {skill} removida."
+    ],
+    "not_found": [
+      "A skill {skill} não está registrada."
+    ]
+  }
+}

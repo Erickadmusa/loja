@@ -1,0 +1,26 @@
+{
+  "show_status": {
+    "default": [
+      "Teodoro está em execução. {agents} agentes registrados ativos e {skills} skills carregadas."
+    ],
+    "withDashboard": [
+      "Abrindo o painel de controle em {url}."
+    ]
+  },
+  "switch_language": {
+    "success": [
+      "Idioma alterado para {language}."
+    ],
+    "unsupported": [
+      "Ainda não ofereço suporte ao idioma {language}. Idiomas suportados: {supported}."
+    ]
+  },
+  "launch_dashboard": {
+    "success": [
+      "O dashboard está disponível em {url}."
+    ],
+    "disabled": [
+      "O painel visual está desativado. Ative TEODORO_CONTROL_CENTER para utilizá-lo."
+    ]
+  }
+}

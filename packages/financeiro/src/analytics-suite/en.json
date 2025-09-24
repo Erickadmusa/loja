@@ -1,0 +1,13 @@
+{
+  "analyze_metrics": {
+    "progress": [
+      "Downloading dataset from {dataset}."
+    ],
+    "success": [
+      "Here is the statistical summary: {summary}."
+    ],
+    "failure": [
+      "I could not analyze the dataset because {reason}."
+    ]
+  }
+}

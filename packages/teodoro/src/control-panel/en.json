@@ -1,0 +1,26 @@
+{
+  "show_status": {
+    "default": [
+      "Teodoro is running. {agents} registered agents are active and {skills} skills loaded."
+    ],
+    "withDashboard": [
+      "Opening the control dashboard at {url}."
+    ]
+  },
+  "switch_language": {
+    "success": [
+      "Language switched to {language}."
+    ],
+    "unsupported": [
+      "I do not support {language} yet. Supported languages: {supported}."
+    ]
+  },
+  "launch_dashboard": {
+    "success": [
+      "Dashboard is available at {url}."
+    ],
+    "disabled": [
+      "The visual dashboard is currently disabled. Enable TEODORO_CONTROL_CENTER to use it."
+    ]
+  }
+}
