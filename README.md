@@ -83,28 +83,38 @@ Este repositório contém a configuração base do seu assistente pessoal **Teod
 ```bash
 # Clonar o Leon (caso ainda não tenha)
 git clone https://github.com/leon-ai/leon.git
-cd leon
 ```
 
-Mantenha esse terminal aberto: os próximos comandos serão executados dentro dele após instalar o Teodoro.
+> Se preferir, deixe este terminal aberto dentro da pasta `leon` — iremos reutilizá-lo mais adiante.
 
-### 2. Instalar o Teodoro automaticamente
+### 2. Clonar o Teodoro
 
-No diretório **deste** repositório (`teodoro`), execute o script:
+Em outro terminal (ou após sair da pasta `leon`), obtenha este repositório e entre nele:
 
 ```bash
-# Na raiz deste projeto (teodoro)
+git clone https://github.com/<seu-usuario>/teodoro.git
+cd teodoro
+```
+
+### 3. Instalar o Teodoro automaticamente
+
+Com o terminal posicionado na raiz **deste** projeto (`teodoro`), execute o script passando o caminho do seu checkout do Leon:
+
+```bash
 ./scripts/install-teodoro.sh /caminho/para/seu/leon
 
-# Exemplo comum, se os diretórios estão lado a lado
+# Exemplo comum, se os diretórios estão lado a lado:
 ./scripts/install-teodoro.sh ../leon
+
+# Se você continuou dentro da pasta "leon", execute a partir dela apontando para o script externo:
+../teodoro/scripts/install-teodoro.sh .
 ```
 
 O script copiará os pacotes `teodoro` e `financeiro` para `packages/teodoro-system` dentro do Leon, registrará as entradas em `core/config/instances.json` e atualizará o arquivo `docker-compose.teodoro.yml` do Leon. Ele é idempotente: pode ser executado novamente ao atualizar este repositório.
 
 > Requisitos do script: `bash`, `python3` e permissões de escrita no diretório do Leon.
 
-### 3. Instalar dependências do Leon
+### 4. Instalar dependências do Leon
 
 De volta ao diretório do Leon:
 
@@ -113,7 +123,7 @@ npm install
 npm run bootstrap
 ```
 
-### 4. Executar com Docker (recomendado)
+### 5. Executar com Docker (recomendado)
 
 Ainda no diretório do Leon:
 
@@ -130,7 +140,7 @@ O serviço principal estará acessível na porta `4242`. Para habilitar a interf
 docker compose -f docker-compose.teodoro.yml --profile dashboard up -d
 ```
 
-### 5. Compilar as skills manualmente (opcional)
+### 6. Compilar as skills manualmente (opcional)
 
 Leon irá detectar os pacotes automaticamente na primeira execução. Caso queira forçar a compilação das _skills_:
 
