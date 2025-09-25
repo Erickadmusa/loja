@@ -1,0 +1,6 @@
+{
+  "name": "agent-factory",
+  "description": "Criação e registro de novos agentes",
+  "type": "command",
+  "author": "Quartel-General Digital"
+}

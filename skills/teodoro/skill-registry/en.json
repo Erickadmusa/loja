@@ -1,0 +1,29 @@
+{
+  "list_skills": {
+    "empty": [
+      "There are no skills registered yet."
+    ],
+    "default": [
+      "I have found {count} skills: {skills}."
+    ]
+  },
+  "install_skill": {
+    "progress": [
+      "Installing skill from {repository} into agent {agent}."
+    ],
+    "success": [
+      "Skill {skill} installed for agent {agent}."
+    ],
+    "failure": [
+      "I could not install the skill because {reason}."
+    ]
+  },
+  "remove_skill": {
+    "success": [
+      "Skill {skill} removed."
+    ],
+    "not_found": [
+      "Skill {skill} is not registered."
+    ]
+  }
+}

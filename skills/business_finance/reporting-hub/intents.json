@@ -1,0 +1,26 @@
+{
+  "intents": [
+    {
+      "name": "generate_report",
+      "utterances": {
+        "pt": ["gerar relatório financeiro", "relatório de vendas", "relatório consolidado"],
+        "en": ["generate financial report", "sales report", "consolidated report"]
+      },
+      "slots": [
+        { "name": "period", "entity": "text" },
+        { "name": "format", "entity": "text" }
+      ]
+    },
+    {
+      "name": "simulate_scenario",
+      "utterances": {
+        "pt": ["simular cenário", "simulação financeira"],
+        "en": ["simulate scenario", "financial simulation"]
+      },
+      "slots": [
+        { "name": "growth", "entity": "number" },
+        { "name": "cost", "entity": "number" }
+      ]
+    }
+  ]
+}

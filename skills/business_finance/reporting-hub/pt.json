@@ -1,0 +1,15 @@
+{
+  "generate_report": {
+    "success": [
+      "Relatório de {period} gerado no formato {format} em {path}."
+    ],
+    "failure": [
+      "Falha ao gerar o relatório porque {reason}."
+    ]
+  },
+  "simulate_scenario": {
+    "success": [
+      "Simulação concluída. Receita esperada: {revenue}, custo esperado: {cost}, lucro projetado: {profit}."
+    ]
+  }
+}

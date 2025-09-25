@@ -1,0 +1,6 @@
+{
+  "name": "analytics-suite",
+  "description": "Análises estatísticas e interpretação de métricas",
+  "type": "command",
+  "author": "Agente Financeiro"
+}

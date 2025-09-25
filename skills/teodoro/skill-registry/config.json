@@ -1,0 +1,6 @@
+{
+  "name": "skill-registry",
+  "description": "Gerenciamento de skills do Teodoro",
+  "type": "command",
+  "author": "Quartel-General Digital"
+}

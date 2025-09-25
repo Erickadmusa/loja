@@ -1,0 +1,11 @@
+{
+  "name": "@teodoro-financeiro/commerce-strategy",
+  "version": "0.1.0",
+  "description": "Estratégias de vendas, UX e psicologia do consumidor",
+  "main": "action.py",
+  "author": "Quartel-General Digital",
+  "license": "MIT",
+  "engines": {
+    "python": ">=3.10"
+  }
+}

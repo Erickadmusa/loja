@@ -1,0 +1,8 @@
+{
+  "name": "@teodoro/agent-factory",
+  "version": "0.1.0",
+  "description": "Cria e lista agentes especializados do Teodoro",
+  "main": "action.js",
+  "author": "Quartel-General Digital",
+  "license": "MIT"
+}

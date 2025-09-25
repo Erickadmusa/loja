@@ -1,0 +1,18 @@
+{
+  "create_agent": {
+    "success": [
+      "Agent {agent} registered with mission: {purpose}."
+    ],
+    "exists": [
+      "Agent {agent} already exists."
+    ]
+  },
+  "list_agents": {
+    "empty": [
+      "No agents registered yet."
+    ],
+    "default": [
+      "Active agents: {agents}."
+    ]
+  }
+}
